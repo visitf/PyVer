@@ -1,0 +1,95 @@
+(lang dune 3.6)
+(name py_verinfer)
+(sections (lib .) (libexec .) (bin ../../bin))
+(files
+ (lib
+  (META
+   dune-package
+   lib/collect_annot.ml
+   lib/py_verinfer.a
+   lib/py_verinfer.cma
+   lib/py_verinfer.cmi
+   lib/py_verinfer.cmt
+   lib/py_verinfer.cmx
+   lib/py_verinfer.cmxa
+   lib/py_verinfer.ml
+   lib/py_verinfer__Collect_annot.cmi
+   lib/py_verinfer__Collect_annot.cmt
+   lib/py_verinfer__Collect_annot.cmx
+   opam
+   pycaml/ast.ml
+   pycaml/ast2string.ml
+   pycaml/json2ast.ml
+   pycaml/pycaml.a
+   pycaml/pycaml.cma
+   pycaml/pycaml.cmi
+   pycaml/pycaml.cmt
+   pycaml/pycaml.cmx
+   pycaml/pycaml.cmxa
+   pycaml/pycaml.ml
+   pycaml/pycaml__Ast.cmi
+   pycaml/pycaml__Ast.cmt
+   pycaml/pycaml__Ast.cmx
+   pycaml/pycaml__Ast2string.cmi
+   pycaml/pycaml__Ast2string.cmt
+   pycaml/pycaml__Ast2string.cmx
+   pycaml/pycaml__Json2ast.cmi
+   pycaml/pycaml__Json2ast.cmt
+   pycaml/pycaml__Json2ast.cmx
+   pycaml/pycaml__Util.cmi
+   pycaml/pycaml__Util.cmt
+   pycaml/pycaml__Util.cmx
+   pycaml/util.ml))
+ (libexec (lib/py_verinfer.cmxs pycaml/pycaml.cmxs))
+ (bin (py_verinfer)))
+(library
+ (name py_verinfer.lib)
+ (kind normal)
+ (archives (byte lib/py_verinfer.cma) (native lib/py_verinfer.cmxa))
+ (plugins (byte lib/py_verinfer.cma) (native lib/py_verinfer.cmxs))
+ (native_archives lib/py_verinfer.a)
+ (requires base core)
+ (main_module_name Py_verinfer)
+ (modes byte native)
+ (modules
+  (wrapped
+   (main_module_name Py_verinfer)
+   (modules
+    ((name Collect_annot)
+     (obj_name py_verinfer__Collect_annot)
+     (visibility public)
+     (impl)))
+   (alias_module
+    (name Py_verinfer)
+    (obj_name py_verinfer)
+    (visibility public)
+    (kind alias)
+    (impl))
+   (wrapped true))))
+(library
+ (name py_verinfer.pycaml)
+ (kind normal)
+ (archives (byte pycaml/pycaml.cma) (native pycaml/pycaml.cmxa))
+ (plugins (byte pycaml/pycaml.cma) (native pycaml/pycaml.cmxs))
+ (native_archives pycaml/pycaml.a)
+ (requires base stdio yojson core batteries)
+ (main_module_name Pycaml)
+ (modes byte native)
+ (modules
+  (wrapped
+   (main_module_name Pycaml)
+   (modules
+    ((name Ast) (obj_name pycaml__Ast) (visibility public) (impl))
+    ((name Ast2string)
+     (obj_name pycaml__Ast2string)
+     (visibility public)
+     (impl))
+    ((name Json2ast) (obj_name pycaml__Json2ast) (visibility public) (impl))
+    ((name Util) (obj_name pycaml__Util) (visibility public) (impl)))
+   (alias_module
+    (name Pycaml)
+    (obj_name pycaml)
+    (visibility public)
+    (kind alias)
+    (impl))
+   (wrapped true))))

@@ -1,0 +1,18 @@
+package "lib" (
+  directory = "lib"
+  description = ""
+  requires = "base core"
+  archive(byte) = "py_verinfer.cma"
+  archive(native) = "py_verinfer.cmxa"
+  plugin(byte) = "py_verinfer.cma"
+  plugin(native) = "py_verinfer.cmxs"
+)
+package "pycaml" (
+  directory = "pycaml"
+  description = ""
+  requires = "base batteries core stdio yojson"
+  archive(byte) = "pycaml.cma"
+  archive(native) = "pycaml.cmxa"
+  plugin(byte) = "pycaml.cma"
+  plugin(native) = "pycaml.cmxs"
+)

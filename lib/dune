@@ -1,0 +1,6 @@
+(library
+ (name pycaml) 
+ (public_name PyVer.pycaml)
+ (libraries base stdio yojson core batteries))
+
+
